@@ -7,6 +7,7 @@ export default function App() {
 	//TODO: STEP 2 - Establish your applictaion's state with some useState hooks.  You'll need one for the home score and another for the away score.
 	let [homeScore, setHomeScore] = useState(0);
 	let [awayScore, setAwayScore] = useState(0);
+	let [quarterCount, setQuarterCount] = useState(1);
 
 	return (
 		<div className="container">
@@ -25,7 +26,7 @@ export default function App() {
 						<div className="away__score">{awayScore}</div>
 					</div>
 				</div>
-				<BottomRow />
+				<BottomRow quarterCount={quarterCount} />
 			</section>
 			<section className="buttons">
 				<div className="homeButtons">
@@ -55,6 +56,24 @@ export default function App() {
 						onClick={() => setAwayScore((awayScore += 3))}
 					>
 						> Away Field Goal
+					</button>
+				</div>
+				<div className="awayButtons">
+					<button
+						className="awayButtons__touchdown"
+						onClick={() => {
+							quarterCount === 4
+								? setQuarterCount((quarterCount = 1))
+								: setQuarterCount((quarterCount += 1));
+						}}
+					>
+						Next Quarter
+					</button>
+					<button
+						className="awayButtons__fieldGoal"
+						onClick={() => setQuarterCount((quarterCount = 1))}
+					>
+						> Reset
 					</button>
 				</div>
 			</section>
